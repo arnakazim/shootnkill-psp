@@ -50,7 +50,7 @@ zombies[zombieAffiche].a = 1
 oldpad = Controls.read()
 
 -- if (x2; y2) is in between rectangle w by h at (x1; y1)
-function colision (x1, y1, w, h, x2, y2)
+function collision (x1, y1, w, h, x2, y2)
     if x2 > x1 and x2 < x1 + w and y2 > y1 and y2 < y1 - h then
         return 1
     else
@@ -183,8 +183,8 @@ while true do
                                 if zombies[i].a == 1 then
                                     -- viseurX = viseurX + 10 -- was in the original decompiled code
                                     -- viseurY = viseurY + 10 -- was in the original decompiled code
-                                    if viseurX > zombies[i].x and viseurX < (zombies[i].x + zombies[i].w) and viseurY > zombies[i].y and viseurY < (zombies[i].y + zombies[i].h) then
-                                        zombies[i].a = 2
+                                    if collision(zombies[i].x, zombies[i].y, zombies[i].w, zombies[i].h, viseurX, viseurY) then
+                                    zombies[i].a = 2
                                         zombiesBoom[i] = chrono:time()
                                         
                                         zombieAffiche = math.random(1, 5)
