@@ -44,43 +44,41 @@ do
   zombiesBoom = l_0_0
   l_0_0 = 0
   j = l_0_0
-  l_0_0 = 230
-  viseurX = l_0_0
-  l_0_0 = 165
-  viseurY = l_0_0
-  l_0_0 = 0
-  commencer = l_0_0
-  l_0_0 = 0
-  menu = l_0_0
-  l_0_0 = 0
-  pause = l_0_0
-  l_0_0 = 0
-  tirs = l_0_0
-  l_0_0 = Timer
-  l_0_0 = l_0_0.new
-  l_0_1 = 0
-  l_0_0 = l_0_0(l_0_1)
-  chrono = l_0_0
-  l_0_0 = chrono
-  l_0_0, l_0_1 = l_0_0:reset, l_0_0
+
+  viseurX = 230
+  viseurY = 165
+  commencer = 0
+  menu = 0
+  pause = 0
+  tirs = 0
+
+  -- Chronomètre
+  -- l_0_0 = Timer
+  -- l_0_0 = l_0_0.new
+  -- l_0_1 = 0
+  -- l_0_0 = l_0_0(l_0_1)
+  -- chrono = l_0_0
+  -- l_0_0 = chrono
+  -- l_0_0, l_0_1 = l_0_0:reset, l_0_0
+  -- l_0_0(l_0_1)
+  chrono = Timer.new()
+  l_0_0, l_0_1 = chrono:reset, chrono
   l_0_0(l_0_1)
-  l_0_0 = 30
-  tempsVague = l_0_0
-  l_0_0 = 0
-  zombiesTues = l_0_0
-  l_0_0 = math
-  l_0_0 = l_0_0.random
-  l_0_1 = 1
-  l_0_0 = l_0_0(l_0_1, 5)
-  zombieAffiche = l_0_0
+
+  tempsVague = 30
+  zombiesTues = 0
+
+  -- Nombre de zombies
+  zombieAffiche = math.random(1, 5)
+
   l_0_0 = zombies
   l_0_1 = zombieAffiche
   l_0_0 = l_0_0[l_0_1]
   l_0_0.a = 1
-  l_0_0 = Controls
-  l_0_0 = l_0_0.read
-  l_0_0 = l_0_0()
-  oldpad = l_0_0
+  
+  -- Lecture des touches
+  oldpad = Controls.read()
+
   l_0_0 = function(l_1_0, l_1_1, l_1_2, l_1_3, l_1_4, l_1_5)
   if l_1_0 < l_1_4 and l_1_4 < l_1_0 + l_1_2 and l_1_1 < l_1_5 and l_1_5 < l_1_1 - l_1_3 then
     return 1
@@ -91,37 +89,24 @@ end
 
   Colision = l_0_0
   repeat
+    -- Clear screen
     l_0_0 = screen
     l_0_0, l_0_1 = l_0_0:clear, l_0_0
     l_0_0(l_0_1)
-    l_0_0 = Controls
-    l_0_0 = l_0_0.read
-    l_0_0 = l_0_0()
-    pad = l_0_0
-    l_0_0 = Music
-    l_0_0 = l_0_0.volume
-    l_0_1 = 32
-    l_0_0(l_0_1)
-    l_0_0 = Mp3me
-    l_0_0 = l_0_0.play
-    l_0_0()
-    l_0_0 = Mp3me
-    l_0_0 = l_0_0.percent
-    l_0_0 = l_0_0()
-    if l_0_0 >= 96 then
-      l_0_0 = Mp3me
-      l_0_0 = l_0_0.stop
-      l_0_0()
-      l_0_0 = Mp3me
-      l_0_0 = l_0_0.load
-      l_0_1 = "musique.mp3"
-      l_0_0(l_0_1)
-      l_0_0 = Mp3me
-      l_0_0 = l_0_0.play
-      l_0_0()
+
+    -- Read controls
+    pad = Controls.read()
+
+    -- Play music
+    Music.volume(32)
+    Mp3me.play()
+    if Mp3me.percent() >= 96 then
+      Mp3me.stop()
+      Mp3me.load("musique.mp3")
+      Mp3me.play()
     end
-    l_0_0 = commencer
-    if l_0_0 == 0 then
+
+    if commencer == 0 then
       l_0_0 = screen
       l_0_0, l_0_1 = l_0_0:blit, l_0_0
       l_0_0(l_0_1, 0, 0, imgSplash)
@@ -136,7 +121,7 @@ end
           commencer = l_0_0
         else
           l_0_0 = menu
-          if l_0_0 == 0 then
+          if menu == 0 then
             l_0_0 = screen
             l_0_0, l_0_1 = l_0_0:blit, l_0_0
             l_0_0(l_0_1, 0, 0, imgMenu)
