@@ -106,7 +106,6 @@ repeat
             end
             temps = chrono:time() / 1000
             tempsRestant = tempsVague - temps
-            l_0_0 = tempsRestant
             if tempsRestant <= 0 then
               screen:blit(0, 0, imgScores)
               screen:print(40, 80, "Duree de la vague : " .. tempsVague .. "s", blanc)
@@ -124,303 +123,151 @@ repeat
 
                 repeat
                   if i <= 5 then
-                    l_0_0 = zombies
-                    l_0_1 = i
-                    l_0_0 = l_0_0[l_0_1]
-                    l_0_0.a = 0
-                    l_0_0 = i
-                    l_0_0 = l_0_0 + 1
-                    i = l_0_0
+                    zombies[i].a = 0
+                    i = i + 1
                   else
-                    l_0_0 = math
-                    l_0_0 = l_0_0.random
-                    l_0_1 = 1
-                    l_0_0 = l_0_0(l_0_1, 5)
-                    zombieAffiche = l_0_0
-                    l_0_0 = zombies
-                    l_0_1 = zombieAffiche
-                    l_0_0 = l_0_0[l_0_1]
-                    l_0_0.a = 1
-                    l_0_0 = 0
-                    menu = l_0_0
+                    zombieAffiche = math.random(1, 5)
+                    zombies[zombieAffiche].a = 0
+                    menu = 0
                   end
                 else
                   if tempsRestant >= 0 then
                     if pause == 0 then
                       screen:blit(0, 0, imgFond)
-                      l_0_0 = 1
-                      i = l_0_0
+                      i = 1
                       repeat
-                        l_0_0 = i
-                        if l_0_0 <= 5 then
-                          l_0_0 = i
-                          if l_0_0 <= 3 then
-                            l_0_0 = zombies
-                            l_0_1 = i
-                            l_0_0 = l_0_0[l_0_1]
-                            l_0_0 = l_0_0.a
-                            if l_0_0 == 1 then
+                        if i <= 5 then
+                          if i <= 3 then
+                            if zombies[i].a == 1 then
                               screen:blit(zombies[i].x, zombies[i].y, imgZombieG)
                           end
-                          l_0_0 = i
-                          if l_0_0 > 3 then
-                            l_0_0 = zombies
-                            l_0_1 = i
-                            l_0_0 = l_0_0[l_0_1]
-                            l_0_0 = l_0_0.a
-                            if l_0_0 == 1 then
+                          if i > 3 then
+                            if zombies[i].a == 1 then
                               screen:blit(zombies[i].x, zombies[i].y, imgZombieP)
                           end
-                          l_0_0 = i
-                          if l_0_0 <= 3 then
-                            l_0_0 = zombies
-                            l_0_1 = i
-                            l_0_0 = l_0_0[l_0_1]
-                            l_0_0 = l_0_0.a
-                            if l_0_0 == 2 then
+                          if i <= 3 then
+                            if zombies[i].a == 2 then
                               screen:blit(zombies[i].x, zombies[i].y, imgZombieBoomG)
-                              l_0_0 = chrono
-                              l_0_0, l_0_1 = l_0_0:time, l_0_0
-                              l_0_0 = l_0_0(l_0_1)
-                              l_0_1 = zombiesBoom
-                              l_0_1 = l_0_1[i]
-                              l_0_0 = l_0_0 - l_0_1
-                              if l_0_0 >= 250 then
-                                l_0_0 = zombies
-                                l_0_1 = i
-                                l_0_0 = l_0_0[l_0_1]
-                                l_0_0.a = 0
+                              
+                              if (chrono.time() - zombiesBoom[i]) >= 250 then
+                                zombies[i].a = 0
                             end
-                            l_0_0 = i
-                            if l_0_0 > 3 then
-                              l_0_0 = zombies
-                              l_0_1 = i
-                              l_0_0 = l_0_0[l_0_1]
-                              l_0_0 = l_0_0.a
-                              if l_0_0 == 2 then
+                            
+                            if i > 3 then
+                              if zombies[i].a == 2 then
                                 screen:blit(zombies[i].x, zombies[i].y, imgZombieBoomP)
-                                l_0_0 = chrono
-                                l_0_0, l_0_1 = l_0_0:time, l_0_0
-                                l_0_0 = l_0_0(l_0_1)
-                                l_0_1 = zombiesBoom
-                                l_0_1 = l_0_1[i]
-                                l_0_0 = l_0_0 - l_0_1
-                                if l_0_0 >= 250 then
-                                  l_0_0 = zombies
-                                  l_0_1 = i
-                                  l_0_0 = l_0_0[l_0_1]
-                                  l_0_0.a = 0
+                                
+                                if (chrono.time() - zombiesBoom[i]) >= 250 then
+                                  zombies[i].a = 0
                                 end
                               end
                             end
                           end
-                          l_0_0 = i
-                          l_0_0 = l_0_0 + 1
-                          i = l_0_0
+                          i = i + 1
                         else
                           screen:blit(viseurX, viseurY, imgViseur)
                           screen:print("Temps restant : " .. tempsRestant .. "s", rouge)
                           screen:print(250, 1, "Zombies tues : " .. zombiesTues, rouge)
-                          l_0_0 = pad
-                          l_0_0, l_0_1 = l_0_0:left, l_0_0
-                          l_0_0 = l_0_0(l_0_1)
-                          if l_0_0 then
-                            l_0_0 = viseurX
-                            if l_0_0 >= 0 then
-                              l_0_0 = viseurX
-                              l_0_0 = l_0_0 - 5
-                              viseurX = l_0_0
+                          
+                          
+                          if pad:left() then
+                            if viseurX >= 0 then
+                              viseurX = viseurX - 5
                           end
-                          l_0_0 = pad
-                          l_0_0, l_0_1 = l_0_0:right, l_0_0
-                          l_0_0 = l_0_0(l_0_1)
-                          if l_0_0 then
-                            l_0_0 = viseurX
-                            if l_0_0 <= 480 then
-                              l_0_0 = viseurX
-                              l_0_0 = l_0_0 + 5
-                              viseurX = l_0_0
+                          
+                          if pad:right() then
+                            if viseurX <= 480 then
+                              viseurX = viseurX + 5
                           end
-                          l_0_0 = pad
-                          l_0_0, l_0_1 = l_0_0:cross, l_0_0
-                          l_0_0 = l_0_0(l_0_1)
-                          if l_0_0 then
-                            l_0_0 = oldpad
-                            l_0_1 = pad
-                            if l_0_0 ~= l_0_1 then
-                              l_0_0 = 1
-                              i = l_0_0
+
+                          if pad:cross() then
+                            if oldpad ~= pad then
+                              i = 1
                               repeat
-                                l_0_0 = i
-                                if l_0_0 <= 5 then
-                                  l_0_0 = zombies
-                                  l_0_1 = i
-                                  l_0_0 = l_0_0[l_0_1]
-                                  l_0_0 = l_0_0.a
-                                  if l_0_0 == 1 then
-                                    l_0_0 = viseurX
-                                    l_0_0 = l_0_0 + 10
-                                    l_0_1 = zombies
-                                    l_0_1 = l_0_1[i]
-                                    l_0_1 = l_0_1.x
-                                    if l_0_1 < l_0_0 then
-                                      l_0_0 = viseurX
-                                      l_0_0 = l_0_0 + 10
-                                      l_0_1 = zombies
-                                      l_0_1 = l_0_1[i]
-                                      l_0_1 = l_0_1.x
-                                      l_0_1 = l_0_1 + zombies[i].w
-                                      if l_0_0 < l_0_1 then
-                                        l_0_0 = viseurY
-                                        l_0_0 = l_0_0 + 10
-                                        l_0_1 = zombies
-                                        l_0_1 = l_0_1[i]
-                                        l_0_1 = l_0_1.y
-                                        if l_0_1 < l_0_0 then
-                                          l_0_0 = viseurY
-                                          l_0_0 = l_0_0 + 10
-                                          l_0_1 = zombies
-                                          l_0_1 = l_0_1[i]
-                                          l_0_1 = l_0_1.y
-                                          l_0_1 = l_0_1 + zombies[i].h
-                                          if l_0_0 < l_0_1 then
-                                            l_0_0 = zombies
-                                            l_0_1 = i
-                                            l_0_0 = l_0_0[l_0_1]
-                                            l_0_0.a = 2
-                                            l_0_0 = zombiesBoom
-                                            l_0_1 = i
-                                            l_0_0[l_0_1] = chrono:time()
-                                            l_0_0 = math
-                                            l_0_0 = l_0_0.random
-                                            l_0_1 = 1
-                                            l_0_0 = l_0_0(l_0_1, 5)
-                                            zombieAffiche = l_0_0
-                                            l_0_0 = zombies
-                                            l_0_1 = zombieAffiche
-                                            l_0_0 = l_0_0[l_0_1]
-                                            l_0_0.a = 1
-                                            l_0_0 = zombiesTues
-                                            l_0_0 = l_0_0 + 1
-                                            zombiesTues = l_0_0
+                                if i <= 5 then
+                                  if zombies[i].a == 1 then
+                                    viseurX = viseurX + 10
+                                    if zombies[i].x < viseurX then
+                                      viseurX = viseurX + 10
+                                      if viseurX < (zombies[i].x + zombies[i].w) then
+                                        viseurY = viseurY + 10
+                                        if zombies[i].y < viseurY then
+                                          viseurY = viseurY + 10
+                                          if viseurY < zombies[i].y + zombies[i].h then
+                                            zombies[i].a = 2
+                                            zombiesBoom[i] = chrono:time()
+                                            
+                                            zombieAffiche = math.random(1, 5)
+                                            zombies[zombieAffiche].a = 1
+                                            
+                                            zombiesTues = zombiesTues + 1
                                           end
                                         end
                                       end
                                     end
                                   end
-                                  l_0_0 = i
-                                  l_0_0 = l_0_0 + 1
-                                  i = l_0_0
+                                  i = i + 1
                                 else
-                                  l_0_0 = tirs
-                                  l_0_0 = l_0_0 + 1
-                                  tirs = l_0_0
+                                  tirs = tirs + 1
                                 end
                             end
-                            l_0_0 = pad
-                            l_0_0, l_0_1 = l_0_0:start, l_0_0
-                            l_0_0 = l_0_0(l_0_1)
-                            if l_0_0 then
-                              l_0_0 = oldpad
-                              l_0_1 = pad
-                              if l_0_0 ~= l_0_1 then
-                                l_0_0 = chrono
-                                l_0_0, l_0_1 = l_0_0:stop, l_0_0
-                                l_0_0(l_0_1)
-                                l_0_0 = 1
-                                pause = l_0_0
+
+                            if pad:start() then
+                              if oldpad ~= pad then
+                                chrono:stop()
+                                pause = 1
                             end
-                            l_0_0 = pause
-                            if l_0_0 == 1 then
+                            
+                            if pause == 1 then
                               screen:blit(0, 0, imgFond)
-                              l_0_0 = 1
-                              i = l_0_0
+                              
+                              i = 1
                               repeat
-                                l_0_0 = i
-                                if l_0_0 <= 5 then
-                                  l_0_0 = i
-                                  if l_0_0 <= 3 then
-                                    l_0_0 = zombies
-                                    l_0_1 = i
-                                    l_0_0 = l_0_0[l_0_1]
-                                    l_0_0 = l_0_0.a
-                                    if l_0_0 == 1 then
+                                if i <= 5 then
+                                  if i <= 3 then
+                                    
+                                    if zombies[i].a == 1 then
                                       screen:blit(zombies[i].x, zombies[i].y, imgZombieG)
                                   end
-                                  l_0_0 = i
-                                  if l_0_0 > 3 then
-                                    l_0_0 = zombies
-                                    l_0_1 = i
-                                    l_0_0 = l_0_0[l_0_1]
-                                    l_0_0 = l_0_0.a
-                                    if l_0_0 == 1 then
+
+                                  if i > 3 then
+                                    if zombies[i].a == 1 then
                                       screen:blit(zombies[i].x, zombies[i].y, imgZombieP)
                                   end
-                                  l_0_0 = i
-                                  if l_0_0 <= 3 then
-                                    l_0_0 = zombies
-                                    l_0_1 = i
-                                    l_0_0 = l_0_0[l_0_1]
-                                    l_0_0 = l_0_0.a
-                                    if l_0_0 == 2 then
+                                  
+                                  if i <= 3 then
+                                    if zombies[i].a == 2 then
                                       screen:blit(zombies[i].x, zombies[i].y, imgZombieBoomG)
                                   end
-                                  l_0_0 = i
-                                  if l_0_0 > 3 then
-                                    l_0_0 = zombies
-                                    l_0_1 = i
-                                    l_0_0 = l_0_0[l_0_1]
-                                    l_0_0 = l_0_0.a
-                                    if l_0_0 == 2 then
+                                  
+                                  if i > 3 then
+                                    if zombies[i].a == 2 then
                                       screen:blit(zombies[i].x, zombies[i].y, imgZombieBoomP)
                                     end
                                   end
-                                  l_0_0 = i
-                                  l_0_0 = l_0_0 + 1
-                                  i = l_0_0
+                                  i = i + 1
                                 else
                                   screen:blit(viseurX, viseurY, imgViseur)
                                   screen:blit(0, 0, imgPause)
-                                  l_0_0 = pad
-                                  l_0_0, l_0_1 = l_0_0:start, l_0_0
-                                  l_0_0 = l_0_0(l_0_1)
-                                  if l_0_0 then
-                                    l_0_0 = oldpad
-                                    l_0_1 = pad
-                                    if l_0_0 ~= l_0_1 then
-                                      l_0_0 = 0
-                                      pause = l_0_0
-                                      l_0_0 = chrono
-                                      l_0_0, l_0_1 = l_0_0:start, l_0_0
-                                      l_0_0(l_0_1)
+                                  
+                                  
+                                  if pad:start() then
+                                    if oldpad ~= pad then
+                                      pause = 0
+                                      chrono:start()
                                     else
-                                      l_0_0 = menu
-                                      if l_0_0 == 2 then
+                                      if menu == 2 then
                                         screen:blit(0, 0, imgAide)
-                                        l_0_0 = pad
-                                        l_0_0, l_0_1 = l_0_0:triangle, l_0_0
-                                        l_0_0 = l_0_0(l_0_1)
-                                        if l_0_0 then
-                                          l_0_0 = oldpad
-                                          l_0_1 = pad
-                                          if l_0_0 ~= l_0_1 then
-                                            l_0_0 = 0
-                                            menu = l_0_0
+                                        
+                                        if pad:triangle() then
+                                          if oldpad ~= pad then
+                                            menu = 0
                                           else
-                                            l_0_0 = menu
-                                            if l_0_0 == 3 then
-                                              l_0_0 = screen
-                                              l_0_0, l_0_1 = l_0_0:blit, l_0_0
-                                              l_0_0(l_0_1, 0, 0, imgCredits)
-                                              l_0_0 = pad
-                                              l_0_0, l_0_1 = l_0_0:triangle, l_0_0
-                                              l_0_0 = l_0_0(l_0_1)
-                                              if l_0_0 then
-                                                l_0_0 = oldpad
-                                                l_0_1 = pad
-                                                if l_0_0 ~= l_0_1 then
-                                                  l_0_0 = 0
-                                                  menu = l_0_0
+                                            if menu == 3 then
+                                              screen:blit( 0, 0, imgCredits)
+                                              if pad:triangle() then
+                                                if oldpad ~= pad then
+                                                  menu = 0
                                                 end
                                               end
                                             end
@@ -441,11 +288,9 @@ repeat
               end
             end
           end
-          l_0_0 = pad
-          oldpad = l_0_0
-          l_0_0 = screen
-          l_0_0, l_0_1 = l_0_0:flip, l_0_0
-          l_0_0(l_0_1)
+
+          oldpad = pad
+          screen:flip()
           do return end
         end
           -- Warning: missing end command somewhere! Added here
