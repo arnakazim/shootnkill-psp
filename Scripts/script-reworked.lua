@@ -49,8 +49,9 @@ zombies[zombieAffiche].a = 1
 -- Lecture des touches
 oldpad = Controls.read()
 
-function Colision (l_1_0, l_1_1, l_1_2, l_1_3, l_1_4, l_1_5)
-    if l_1_0 < l_1_4 and l_1_4 < l_1_0 + l_1_2 and l_1_1 < l_1_5 and l_1_5 < l_1_1 - l_1_3 then
+-- if (x2; y2) is in between rectangle w by h at (x1; y1)
+function colision (x1, y1, w, h, x2, y2)
+    if x2 > x1 and x2 < x1 + w and y2 > y1 and y2 < y1 - h then
         return 1
     else
         return 0
