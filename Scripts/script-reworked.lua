@@ -152,7 +152,7 @@ while true do
                                 screen:blit(zombies[i].x, zombies[i].y, imgZombieBoomP)
                             end
 
-                            if (chrono.time() - zombiesBoom[i]) >= 250 then -- Hide exploding zombie after 250ms
+                            if (chrono:time() - zombiesBoom[i]) >= 250 then -- Hide exploding zombie after 250ms
                                 zombies[i].a = 0
                             end
                         end
@@ -160,18 +160,20 @@ while true do
 
                     
                     screen:blit(viseurX, viseurY, imgViseur)
-                    screen:print("Temps restant : " .. tempsRestant .. "s", rouge)
+                    screen:print(0, 0, "Temps restant : " .. tempsRestant .. "s", rouge)
                     screen:print(250, 1, "Zombies tues : " .. zombiesTues, rouge)
                         
                         
                     if pad:left() then
                         if viseurX >= 0 then
-                        viseurX = viseurX - 5
+                            viseurX = viseurX - 5
+                        end
                     end
                         
                     if pad:right() then
                         if viseurX <= 480 then
-                        viseurX = viseurX + 5
+                            viseurX = viseurX + 5
+                        end
                     end
 
                     if pad:cross() then
@@ -227,8 +229,8 @@ while true do
                                 
                     if pad:start() then
                         if oldpad ~= pad then
-                        pause = 0
-                        chrono:start()
+                            pause = 0
+                            chrono:start()
                         end
                     end
                 end
